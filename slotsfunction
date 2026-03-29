@@ -1,0 +1,76 @@
+##
+#slotmachine
+#Evie W
+# Slot machine code
+
+# Create list of symbols
+
+import random
+
+cash = 100
+
+symbols = [["💰", "🍒", "7️⃣"],
+           ["🍀", "💎", "🃏"],
+           ["👾", "💄", "🕷️"]]
+
+# would you like to spin
+
+spin = input("would you like to spin yes/no? cost = $10")
+while spin == "yes" and cash > 0:
+    cash = cash - 10
+
+
+
+    #make new grid
+    newgrid = []
+
+    for i in range(3):
+        rows = [] #place to put them 
+        for x in range(3):
+            randomsymbol = random.choice(random.choice(symbols)) # choose a random symbol
+            rows.append(randomsymbol) # add to the rows in grid
+        newgrid.append(rows)
+
+    for row in newgrid: # add row by row in grid
+        print (row)
+    
+    def winner(grid) #function to check for a win  
+    
+    # check middle row
+    if newgrid[1][0] == newgrid[1][1] == newgrid[1][2]:
+        print("Win! +$50")
+        cash += 50
+        print("Balance:", cash)
+    # check top row
+    elif newgrid[0][0] == newgrid[0][1] == newgrid[0][2]:
+        print("Win! +$50")
+        cash += 50
+        print("Balance:", cash)
+    # check bottom row
+    elif newgrid[2][0] == newgrid[2][1] == newgrid[2][2]:
+        print("Win! +$50")
+        cash += 50
+        print("Balance:", cash)
+    else:
+        print("NO WIN THIS TIME")
+        print("Balance:", cash)
+
+            
+        
+    # ask to go again
+    again = input("would you like to spin again yes/no")
+    if again == "yes" and cash > 0:
+        spin = "yes"
+    elif again == "no":
+        spin = "no"
+        print("Your total is", cash)
+        break
+    if cash <= 0:
+        print("broke")
+        add = input("add more moneys? yes/no")
+        if add == "yes":
+            cashadd = int(input("how much more?"))
+            cash = cash + cashadd
+            spin = "yes"
+        else:
+            print("Thank you for playing!")
